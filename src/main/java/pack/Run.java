@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by RTLabs on 07.12.2015.
@@ -18,10 +19,12 @@ public class Run {
     Figure figure;
 
     @RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
+    @ResponseBody
     public String a(){
-        System.out.println(figure.getPerimeter());
-        System.out.println(figure.getSpace());
-        return "123";
+        String s = "Perimeter: " + String.valueOf(figure.getPerimeter()) + "<br>" +
+                ("Space: " + figure.getSpace());
+
+        return s;
     }
 
 }
