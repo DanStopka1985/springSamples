@@ -1,18 +1,23 @@
 package pack;
 
+import org.apache.commons.dbcp.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
-/**
- * Created by RTLabs on 07.12.2015.
- */
+import java.util.Properties;
+
 @Configuration
+@EnableTransactionManagement
 @ComponentScan
 public class Conf {
 
@@ -42,8 +47,45 @@ public class Conf {
         return viewResolver;
     }
 
+    @Bean(name = "dataSource")
+    public BasicDataSource dataSource() {
+
+        BasicDataSource ds = new BasicDataSource();
+        ds.setDriverClassName("org.postgresql.Driver");
+        ds.setUrl("jdbc:postgresql://localhost:5432/postgres");
+        ds.setUsername("postgres");
+        ds.setPassword("postgres");
+        return ds;
+    }
+
     @Bean
-    Figure figure(  ){
+    public SessionFactory sessionFactory() {
+        LocalSessionFactoryBuilder builder =
+                new LocalSessionFactoryBuilder(dataSource());
+        builder.scanPackages("pack.Entities")
+                .addProperties(getHibernateProperties());
+
+        return builder.buildSessionFactory();
+    }
+
+    private Properties getHibernateProperties() {
+        Properties prop = new Properties();
+        prop.put("hibernate.format_sql", "true");
+        prop.put("hibernate.show_sql", "true");
+        prop.put("hibernate.dialect",
+                "org.hibernate.dialect.PostgreSQL82Dialect");
+        return prop;
+    }
+
+    //Create a transaction manager
+    @Bean
+    public HibernateTransactionManager txManager() {
+        return new HibernateTransactionManager(sessionFactory());
+    }
+
+
+    @Bean
+    Figure figure(){
         Circle c = new Circle();
         c.setR(10);
         return c;
