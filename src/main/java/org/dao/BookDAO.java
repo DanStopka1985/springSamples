@@ -1,4 +1,4 @@
-package org.pack;
+package org.dao;
 
 import org.entities.Book;
 import org.hibernate.SessionFactory;

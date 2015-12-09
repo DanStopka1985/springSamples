@@ -1,4 +1,4 @@
-package org.pack;
+package org.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
@@ -65,7 +65,7 @@ public class Conf {
 
         LocalSessionFactoryBuilder builder =
                 new LocalSessionFactoryBuilder(dataSource());
-        builder.scanPackages("org/entities")
+        builder.scanPackages("org/entities", "org")
                 .addProperties(getHibernateProperties());
 
         return builder.buildSessionFactory();
