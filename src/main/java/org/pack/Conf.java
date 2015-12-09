@@ -1,4 +1,4 @@
-package pack;
+package org.pack;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
@@ -13,6 +13,8 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
+import org.temp.Circle;
+import org.temp.Figure;
 
 import java.util.Properties;
 
@@ -60,9 +62,10 @@ public class Conf {
 
     @Bean
     public SessionFactory sessionFactory() {
+
         LocalSessionFactoryBuilder builder =
                 new LocalSessionFactoryBuilder(dataSource());
-        builder.scanPackages("pack.Entities")
+        builder.scanPackages("org/entities")
                 .addProperties(getHibernateProperties());
 
         return builder.buildSessionFactory();
@@ -74,6 +77,7 @@ public class Conf {
         prop.put("hibernate.show_sql", "true");
         prop.put("hibernate.dialect",
                 "org.hibernate.dialect.PostgreSQL82Dialect");
+
         return prop;
     }
 

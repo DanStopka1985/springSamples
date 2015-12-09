@@ -18,7 +18,7 @@
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>
-                pack.Conf
+                org.pack.Conf
             </param-value>
         </init-param>
     </servlet>
