@@ -1,5 +1,7 @@
 package org.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity(name =  "Book")
@@ -40,6 +42,7 @@ public class Book {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
+
     private Author author;
 
     public Author getAuthor() {

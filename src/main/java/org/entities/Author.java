@@ -1,5 +1,7 @@
 package org.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class Author {
     @Id
     @GeneratedValue
     private int id;
-    @Column (name = "name")
+    @Column
     private String name;
 
     public int getId() {
@@ -32,6 +34,7 @@ public class Author {
         this.name = name;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Book> books;
 

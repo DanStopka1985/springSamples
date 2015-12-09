@@ -1,6 +1,5 @@
 package org.dao;
 
-import org.entities.Book;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

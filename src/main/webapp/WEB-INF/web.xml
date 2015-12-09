@@ -20,7 +20,7 @@
             <param-value>
                 org.config.Conf,
                 org.dao.BookDAO,
-                org.ctrl.Run
+                org.ctrl.RestCtrl
 
             </param-value>
         </init-param>
