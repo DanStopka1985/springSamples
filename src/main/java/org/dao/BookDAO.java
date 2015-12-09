@@ -10,12 +10,13 @@ import java.util.List;
 
 
 @Service
+@SuppressWarnings(value = "unchecked")
 public class BookDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
     @Transactional(readOnly = true)
-    public List getAll(){
+    public List<Book> getAll(){
 
         return sessionFactory.getCurrentSession()
                 .createQuery("select b from Book b")

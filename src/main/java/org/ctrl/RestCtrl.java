@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @EnableWebMvc
-@SuppressWarnings(value = "unchecked")
+
 public class RestCtrl {
     @Autowired
     Figure figure;
