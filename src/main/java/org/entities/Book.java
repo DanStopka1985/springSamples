@@ -1,10 +1,8 @@
-package pack.Entities;
-
-import pack.Entities.Author;
+package org.entities;
 
 import javax.persistence.*;
 
-@Entity(name =  "book")
+@Entity(name =  "Book")
 @Table
 public class Book {
     @Id

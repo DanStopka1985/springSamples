@@ -1,8 +1,7 @@
-package pack.Entities;
+package org.entities;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by RTLabs on 02.12.2015.
