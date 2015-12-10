@@ -1,5 +1,6 @@
 package org.dao;
 
+import org.entities.Author;
 import org.entities.Book;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,28 @@ public class BookDAO {
     }
 
     @Transactional
-    public void createBook(Book book){
+    public void create(Book book){
+        Author author = book.getAuthor();
+        author = (Author) sessionFactory.getCurrentSession().get(Author.class, author.getId());
+        book.setAuthor(author);
         sessionFactory.getCurrentSession().persist(book);
     }
 
     @Transactional
-    public void updateBook(int id, Book book){
+    public void update(Book book){
         sessionFactory.getCurrentSession().update(book);
+    }
+
+    @Transactional
+    public void delete(int id){
+        Book book = (Book) sessionFactory.getCurrentSession().get(Book.class, id);
+        if (book != null)
+            sessionFactory.getCurrentSession().delete(book);
+    }
+
+    @Transactional
+    public void insert(Book book){
+        sessionFactory.getCurrentSession().persist(book);
     }
 
 

@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.entities.Book;
 
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.temp.Figure;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +30,23 @@ public class RestCtrl {
         return bookDAO.getById(id);
     }
 
+    @RequestMapping(value = "book/{id}", method = RequestMethod.DELETE)
+    public void deleteBook(@PathVariable int id){
+        bookDAO.delete(id);
+    }
+
+    @RequestMapping(value = "book", method = RequestMethod.POST)
+    public void updateBook(@RequestBody Book book){
+        bookDAO.update(book);
+    }
+
+    @RequestMapping(value = "book", method = RequestMethod.PUT)
+    public void insertBook(@RequestBody Book book){
+        bookDAO.create(book);
+    }
+
+
+
     @RequestMapping(value = "x", method = RequestMethod.GET)
     public void temp() {/*
         ArrayList<String> strings = new ArrayList<String>();
@@ -44,7 +59,12 @@ public class RestCtrl {
         Author author = new Author();
         author.setName("author1");
         book.setAuthor(author);
-        bookDAO.createBook(book);
+        bookDAO.create(book);
+
+        book.setName("book2");
+        bookDAO.update(book);
+
+        bookDAO.delete(100);
 
     }
 
