@@ -1,4 +1,5 @@
 package org.ctrl;
+import org.dao.AuthorDAO;
 import org.dao.BookDAO;
 import org.entities.Author;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import java.util.List;
 public class RestCtrl {
     @Autowired
     BookDAO bookDAO;
+
+    @Autowired
+    AuthorDAO authorDAO;
 
     @RequestMapping(value = "books", method = RequestMethod.GET)
     public List<Book> getBooks(){
@@ -45,7 +49,30 @@ public class RestCtrl {
         bookDAO.create(book);
     }
 
+    @RequestMapping(value = "authors", method = RequestMethod.GET)
+    public List<Author> getAuthor(){
+        return authorDAO.getAll();
+    }
 
+    @RequestMapping(value = "author/{id}", method = RequestMethod.GET)
+    public Author getAuthorById(@PathVariable int id){
+        return authorDAO.getById(id);
+    }
+
+    @RequestMapping(value = "author/{id}", method = RequestMethod.DELETE)
+    public void deleteAuthor(@PathVariable int id){
+        authorDAO.delete(id);
+    }
+
+    @RequestMapping(value = "author", method = RequestMethod.POST)
+    public void updateAuthor(@RequestBody Author author){
+        authorDAO.update(author);
+    }
+
+    @RequestMapping(value = "author", method = RequestMethod.PUT)
+    public void insertAuthor(@RequestBody Author author){
+        authorDAO.create(author);
+    }
 
     @RequestMapping(value = "x", method = RequestMethod.GET)
     public void temp() {/*
