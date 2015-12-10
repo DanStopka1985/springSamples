@@ -1,5 +1,6 @@
 package org.ctrl;
 import org.dao.BookDAO;
+import org.entities.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.entities.Book;
@@ -19,9 +20,6 @@ import java.util.List;
 
 public class RestCtrl {
     @Autowired
-    Figure figure;
-
-    @Autowired
     BookDAO bookDAO;
 
     @RequestMapping(value = "books", method = RequestMethod.GET)
@@ -35,11 +33,19 @@ public class RestCtrl {
     }
 
     @RequestMapping(value = "x", method = RequestMethod.GET)
-    public ArrayList<String> getX() {
+    public void temp() {/*
         ArrayList<String> strings = new ArrayList<String>();
         strings.add("a");
         strings.add("b");
-        return strings;
+        return strings;*/
+        Book book = new Book();
+        book.setName("book1");
+        book.setPrice(2);
+        Author author = new Author();
+        author.setName("author1");
+        book.setAuthor(author);
+        bookDAO.createBook(book);
+
     }
 
 }

@@ -22,6 +22,7 @@ public class BookDAO {
                 .createQuery("select b from Book b")
                 .list();
     }
+
     @Transactional(readOnly = true)
     public Book getById(int id){
         List<Book> books = sessionFactory.getCurrentSession()
@@ -31,5 +32,16 @@ public class BookDAO {
         if (books.size() > 0) return books.get(0);
         else return null;
     }
+
+    @Transactional
+    public void createBook(Book book){
+        sessionFactory.getCurrentSession().persist(book);
+    }
+
+    @Transactional
+    public void updateBook(int id, Book book){
+        sessionFactory.getCurrentSession().update(book);
+    }
+
 
 }
