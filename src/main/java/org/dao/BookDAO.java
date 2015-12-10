@@ -25,12 +25,7 @@ public class BookDAO {
 
     @Transactional(readOnly = true)
     public Book getById(int id){
-        List<Book> books = sessionFactory.getCurrentSession()
-                .createQuery("select b from Book b where b.id = :id")
-                .setParameter("id", id).list();
-
-        if (books.size() > 0) return books.get(0);
-        else return null;
+        return (Book) sessionFactory.getCurrentSession().get(Book.class, id);
     }
 
     @Transactional
