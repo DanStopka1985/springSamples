@@ -49,10 +49,4 @@ public class BookDAO {
             sessionFactory.getCurrentSession().delete(book);
     }
 
-    @Transactional
-    public void insert(Book book){
-        sessionFactory.getCurrentSession().persist(book);
-    }
-
-
 }

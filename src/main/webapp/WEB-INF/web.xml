@@ -20,8 +20,8 @@
             <param-value>
                 org.config.Conf,
                 org.dao.BookDAO,
+                org.dao.AuthorDAO,
                 org.ctrl.RestCtrl
-
             </param-value>
         </init-param>
     </servlet>

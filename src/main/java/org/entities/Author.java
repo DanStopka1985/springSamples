@@ -9,7 +9,7 @@ import java.util.List;
  * Created by RTLabs on 02.12.2015.
  */
 
-@Entity(name =  "author")
+@Entity(name =  "Author")
 @Table
 public class Author {
     @Id
