@@ -20,7 +20,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan
+@ComponentScan(basePackages = { "org.config", "org.dao" })
 public class Conf {
 
     @Bean
@@ -65,7 +65,7 @@ public class Conf {
 
         LocalSessionFactoryBuilder builder =
                 new LocalSessionFactoryBuilder(dataSource());
-        builder.scanPackages("org/entities", "org")
+        builder.scanPackages("org/entities")
                 .addProperties(getHibernateProperties());
 
         return builder.buildSessionFactory();
