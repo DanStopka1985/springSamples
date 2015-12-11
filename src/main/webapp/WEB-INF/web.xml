@@ -18,10 +18,10 @@
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>
-                org.config.Conf,
+                org.config.Conf<!--,
                 org.dao.BookDAO,
                 org.dao.AuthorDAO,
-                org.ctrl.RestCtrl
+                org.ctrl.RestCtrl-->
             </param-value>
         </init-param>
     </servlet>
