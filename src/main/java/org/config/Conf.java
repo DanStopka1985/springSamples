@@ -20,7 +20,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "org.config", "org.dao", "org.ctrl" })
+@ComponentScan(basePackages = { "org.config", "org.dao"/*, "org.ctrl" */})
 public class Conf {
 
     @Bean
