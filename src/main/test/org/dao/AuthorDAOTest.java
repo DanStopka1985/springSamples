@@ -5,10 +5,12 @@ import org.entities.Author;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.temp.Figure;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -18,30 +20,34 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Conf.class)
-//@Transactional
+@Transactional
+@Rollback(false)
 
 public class AuthorDAOTest {
 
     @Autowired
-    Figure figure;
+    AuthorDAO authorDAO;
 
     @Autowired
-    AuthorDAO authorDAO;
+    BookDAO bookDAO;
 
     @Test
     public void testGetAll() throws Exception {
-        assertNotNull(figure);
         assertNotNull(authorDAO);
+
+        List<Author> authorList = authorDAO.getAll();
+        int authorsCnt = authorList.size();
+
         Author author = new Author();
         author.setName("test author");
         authorDAO.create(author);
-//        authorDAO.create(author);
-//        assertTrue(author.getId() == 0);
+        authorList = authorDAO.getAll();
+        assertEquals(authorsCnt + 1, authorList.size());
 
+        int testAuthorId = author.getId();
+        authorDAO.delete(testAuthorId);
+        authorList = authorDAO.getAll();
+        assertEquals(authorsCnt, authorList.size());
 
-
-//        authorDAO.create();
-//        authorDAO.getAll();
-//        assertTrue(true);
     }
 }
