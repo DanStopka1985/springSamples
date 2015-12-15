@@ -7,6 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+//import org.springframework.test.context.ContextConfiguration;
+//import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -19,8 +21,10 @@ import org.temp.Figure;
 import java.util.Properties;
 
 @Configuration
+//@ContextConfiguration
+//@WebAppConfiguration
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "org.config", "org.dao"/*, "org.ctrl" */})
+@ComponentScan(basePackages = { "org.config", "org.dao", "org.ctrl" })
 public class Conf {
 
     @Bean
